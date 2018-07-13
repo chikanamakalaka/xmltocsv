@@ -1,0 +1,4 @@
+/html/body/div/div/div/main/section/div/article/div/section/h3
+/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/iframe
+/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div
+/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/p
