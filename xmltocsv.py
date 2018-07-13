@@ -28,18 +28,18 @@ page = requests_session.get('file:///Users/mhocker/Desktop/xmltocsv/video.html')
 tree = html.fromstring(page.content)
 
 # #Get Section headers
-group = tree.xpath('//body/div/div/div/main/section/div/article/div/section/h3/text()')
+group = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/h3/text()')
 
 #Get list of video urls
-video_url = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/iframe/@src')
+#video_url = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/iframe/@src')
 
 #Get list of Video titles
-title = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/text()')
+#title = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/text()')
 
 #Get list of Video discriptions
-desc = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/p/text()')
+#desc = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/p/text()')
 
 print 'Group: ', group
-print 'Video URL: ', video_url
-print 'Title: ', title
-print 'Description: ', desc
+#print 'Video URL: ', video_url.strip()
+#print 'Title: ', title.strip()
+#print 'Description: ', desc.strip()
