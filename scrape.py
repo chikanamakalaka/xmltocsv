@@ -27,19 +27,19 @@ requests_session.mount('file://', LocalFileAdapter())
 page = requests_session.get('file:///Users/mhocker/Desktop/xmltocsv/video.html')
 tree = html.fromstring(page.content)
 
-#Get Section headers
-group = tree.xpath('/html/body/div/div/div[2]/main/section[@id = "content"]/div[@id = "block-gravit-content"]/article[@id = "node-1181"]/div/section[2]/h3')
+# #Get Section headers
+group = tree.xpath('//body/div/div/div/main/section/div/article/div/section/h3/text()')
 
 #Get list of video urls
-video = tree.xpath('/html/body/div/div/div[2]/main/section[@id = "content"]/div[@id = "block-gravit-content"]/article[@id = "node-1181"]/div/section[2]/div/section[1]/div/div[1]/div/iframe')
+video_url = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/iframe/@src')
 
 #Get list of Video titles
-titles = tree.xpath('/html/body/div/div/div[2]/main/section[@id = "content"]/div[@id = "block-gravit-content"]/article[@id = "node-1181"]/div/section[2]/div/section[1]/div/div[2]/div')
+title = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/text()')
 
 #Get list of Video discriptions
-disc = tree.xpath('/html/body/div/div/div[2]/main/section[@id = "content"]/div[@id = "block-gravit-content"]/article[@id = "node-1181"]/div/section[2]/div/section[1]/div/div[3]/div/p')
+desc = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/p/text()')
 
 print 'Group: ', group
-print 'Video URL: ', video
-print 'Title: ', titles
-print 'Discription: ', disc
+print 'Video URL: ', video_url
+print 'Title: ', title
+print 'Description: ', desc
