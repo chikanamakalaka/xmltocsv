@@ -3,6 +3,8 @@
 from lxml import html
 import requests
 import os
+import csv
+import sys
 from requests_testadapter import Resp
 
 class LocalFileAdapter(requests.adapters.HTTPAdapter):
