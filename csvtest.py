@@ -29,11 +29,17 @@ requests_session.mount('file://', LocalFileAdapter())
 page = requests_session.get('file:///Users/mhocker/Desktop/xmltocsv/video.html')
 tree = html.fromstring(page.content)
 
-data = [(1, "A towel,", 1.0),
-        (42, " it says, ", 2.0),
-        (1337, "is about the most ", -1),
-        (0, "massively useful thing ", 123),
-        (-2, "an interstellar hitchhiker can have.", 3)]
+# #Get Section headers
+group = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/h3/text()')
+
+#Get list of video urls
+video_url = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/iframe/@src')
+
+#Get list of Video titles
+title = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/text()')
+
+#Get list of Video discriptions
+desc = tree.xpath('/html/body/div/div/div/main/section/div/article/div/section/div/section/div/div/div/p/text()')
 
 # Write CSV file
 kwargs = {'newline': ''}
@@ -44,8 +50,11 @@ if sys.version_info < (3, 0):
 
 with open('test.csv', mode, **kwargs) as fp:
     writer = csv.writer(fp, delimiter=str(','))
-    # writer.writerow(["your", "header", "foo"])  # write header
-    writer.writerows(data)
+    writer.writerow(["group", "video_url", "title", "desc"])  # write header
+    writer.writerows(group)
+    writer.writerows(video_url)
+    writer.writerows(title)
+    writer.writerows(desc)
 
 # Read CSV file
 kwargs = {'newline': ''}
@@ -54,14 +63,9 @@ if sys.version_info < (3, 0):
     kwargs.pop('newline', None)
     mode = 'rb'
 with open('test.csv', mode, **kwargs) as fp:
-    reader = csv.reader(fp, delimiter=',', quotechar='"')
-    # next(reader, None)  # skip the headers
+    reader = csv.reader(fp, delimiter=';', quotechar='"')
+    next(reader, None)  # skip the headers
     data_read = [row for row in reader]
 
 print(data_read)
 
-# Write CSV file
-with open('test.csv', 'w', newline='') as fp:
-    writer = csv.writer(fp, encoding='utf-8')
-    # writer.writerow(["your", "header", "foo"])  # write header
-    writer.writerows(data)
